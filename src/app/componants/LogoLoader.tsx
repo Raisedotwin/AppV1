@@ -19,7 +19,7 @@ const LogoLoader = () => {
           <div className="relative transform transition-all duration-300 animate-bounce"
                style={{ animationDuration: '2s' }}>
             <Image 
-              src="/icons/logo.png" 
+              src="/icons/balloonblue.png" 
               alt="Loading..." 
               width={100} 
               height={100}

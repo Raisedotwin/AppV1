@@ -141,7 +141,7 @@ const NavBar: React.FC = () => {
           <Link href="/">
             <div className="text-xl font-bold text-gray-800 cursor-pointer flex items-center">
               <Image
-                src="/icons/logo.png"
+                src="/icons/balloon2.png"
                 alt="Logo"
                 width={32}
                 height={32}

@@ -121,8 +121,42 @@ const HoldingsPage = () => {
               </p>
             </div>
             
+            <div className="mb-6">
+              <div className="flex items-start mb-4">
+                <div className="flex items-center h-5">
+                  <input
+                    id="terms"
+                    type="checkbox"
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label htmlFor="terms" className="font-medium text-gray-700">
+                    I agree to the{' '}
+                    <a 
+                      href="https://docs.google.com/document/d/1ugOMgDfG8luyrhh2wf1Z1NAVthwg9a6l/edit" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Terms of Service
+                    </a>{' '}
+                    and Privacy Policy
+                  </label>
+                </div>
+              </div>
+            </div>
+            
             <button
-              onClick={() => login()}
+              onClick={() => {
+                const checkbox = document.getElementById('terms') as HTMLInputElement;
+                if (checkbox?.checked) {
+                  login();
+                } else {
+                  alert('Please agree to the Terms of Service to continue');
+                }
+              }}
               className="w-full group relative flex items-center justify-center px-8 py-4 text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               <span className="text-lg font-semibold mr-2">Launch App</span>
@@ -142,7 +176,12 @@ const HoldingsPage = () => {
             
             <div className="pt-6 mt-6">
               <p className="text-sm text-gray-500 text-center">
-                By connecting your wallet, you agree to our Terms of Service and Privacy Policy
+                By connecting your wallet, you agree to our <a 
+                  href="https://docs.google.com/document/d/1ugOMgDfG8luyrhh2wf1Z1NAVthwg9a6l/edit" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >Terms of Service</a> and Privacy Policy
               </p>
             </div>
           </div>
