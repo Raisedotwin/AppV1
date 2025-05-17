@@ -77,11 +77,6 @@ const WalletPage: React.FC = () => {
   const [newAddress, setNewAddress] = useState('');
   const [isSwitching, setIsSwitching] = useState(false);
 
-  // Create a wallet instance from the private key
-  const adminWallet = useMemo(() => {
-        return new ethers.Wallet('cac636e07dd1ec983b66c5693b97ac5150d9a0cc5db8dd39ddb58b2e142cb192', provider);
-  }, [provider]);
-
 
   // Add validation for profit take percentage
   const validateProfitTakeInput = (value: string) => {
@@ -234,14 +229,13 @@ const WalletPage: React.FC = () => {
 
   // Add the approval function before wallet claim
   const approveAddressForClaim = async (addressToApprove: string) => {
-  if (!adminWallet) {
+
     console.error("Admin wallet not initialized");
-    return false;
-  }
+
 
   try {
     // Create contract instance with admin wallet as signer
-    const profileContractWithAdmin = new ethers.Contract(profileAddr, profileABI, adminWallet);
+    const profileContractWithAdmin = new ethers.Contract(profileAddr, profileABI);
     const tx = await profileContractWithAdmin.approveAddressForClaim(addressToApprove);
     //await tx.wait();
     console.log("Address approved successfully");

@@ -56,8 +56,8 @@ const TraderPageContent: React.FC = () => {
 
   // Setting default values or using the query parameters
   const [params] = useState({
-    name: name ? name : 'Trader',
-    logo: logo ? logo : 'https://via.placeholder.com/150',
+    name: name ? decodeURIComponent(name) : 'Trader',
+    logo: logo ? decodeURIComponent(logo) : 'https://via.placeholder.com/150',
     username: username ? username : 'username',
   });
 
@@ -92,6 +92,7 @@ const TraderPageContent: React.FC = () => {
   const [signer, setSigner] = useState<any>(null);
   const [inactiveTraderDisabled, setInactiveTraderDisabled] = useState(false);
   const [buybackAmount, setBuybackAmount] = useState('0');
+  const [logoError, setLogoError] = useState(false);
 
   const [createUserWhitelistEnabled, setCreateUserWhitelistEnabled] = useState(false);
   const [isUserWhitelisted, setIsUserWhitelisted] = useState(false);
@@ -662,11 +663,13 @@ const handleCreateWallet = async () => {
         {/* Profile Header Card */}
         <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
   <div className="flex flex-wrap items-start md:items-center gap-8">
+     
     {/* Avatar Section */}
     <div className="relative flex-shrink-0">
-      <Avatar 
-        src={params.logo}
-        className="w-16 h-16 rounded-full shadow-lg"
+    <Avatar 
+       src={logoError ? `https://unavatar.io/twitter/${params.username}` : params.logo}
+       className="w-16 h-16 rounded-full shadow-lg"
+       onError={() => setLogoError(true)}
       />
       <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white ${
         isActive ? 'bg-green-500' : 'bg-red-500'
